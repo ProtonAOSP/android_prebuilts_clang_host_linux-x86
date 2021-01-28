@@ -55,6 +55,37 @@ libclang_rt_prebuilt_library_static {
 }
 
 libclang_rt_prebuilt_library_static {
+    name: "libclang_rt.builtins-arm-android-exported",
+    sdk_version: "minimum",
+    enabled: false,
+    ramdisk_available: true,
+    recovery_available: true,
+    vendor_available: true,
+    native_bridge_supported: true,
+    sanitize: {
+        never: true,
+    },
+    arch: {
+        arm: {
+            enabled: true,
+        },
+    },
+    stl: "none",
+    apex_available: [
+        "//apex_available:anyapex",
+        "//apex_available:platform",
+    ],
+
+    // This exported variant of the builtins library is only intended for use in
+    // libc.so and libm.so, which exports some builtins symbols for backwards
+    // compatibility.
+    visibility: [
+        "//bionic:__subpackages__",
+        "//frameworks/libs/native_bridge_support/libc:__subpackages__",
+    ],
+}
+
+libclang_rt_prebuilt_library_static {
     name: "libclang_rt.builtins-aarch64-android",
     sdk_version: "minimum",
     enabled: false,
